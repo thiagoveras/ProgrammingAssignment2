@@ -1,8 +1,10 @@
-## Put comments here that give an overall description of what your
-## functions do
+## Programming Assignment 2 (Week 3) : R Programming Course
 
-## Write a short comment describing this function
-
+## The first function, makeCacheMatrix creates a special "matrix", which is really a list containing a function to
+# set the value of the matrix
+# get the value of the matrix
+# set the value of the inversed matrix
+# get the value of the inversed matrix
 makeCacheMatrix <- function(matrix = matrix()) {
     
     inversed_matrix <- NULL 
@@ -30,21 +32,23 @@ makeCacheMatrix <- function(matrix = matrix()) {
 }
 
 
-## Write a short comment describing this function
-
+## The second function calculates the inversed matrix of the special "matrix" created with the above function. 
+# However, it first checks to see if the inversed matrix has already been calculated. 
+# If so, it gets the inversed matrix from the cache and skips the computation. 
+# Otherwise, it calculates the inversed matrix of the data and sets the value of the inversed matrix in the cache.
 cacheSolve <- function(matrix, ...) {
     
     inversed_matrix <- matrix$getInversedMatrix() # get the inversed matrix from matrix
     
-    # check if is null because the first time it is setted to null
-    if(!is.null(inversed_matrix)) { # if is not null...
+    # check if the inversed matrix has already been calculated
+    if(!is.null(inversed_matrix)) { # if yes...
         message("getting cached data")
-        return(inversed_matrix) # return the inversed matrix
+        return(inversed_matrix) # return the inversed matrix of the cache skips the computation
     }
     
-    data <- matrix$get() # if is null... get the matrix data using matrix$get
-    inversed_matrix <- solve(data) # solve the data using solve()
-    matrix$setInversedMatrix(inversed_matrix) # set the inversed_matrix in matrix using matrix$setInversedMatrix
+    data <- matrix$get() # if no... get the matrix data using matrix$get
+    inversed_matrix <- solve(data) # compute the inversed matrix of the data using solve()
+    matrix$setInversedMatrix(inversed_matrix) # set the inversed_matrix in the cache using matrix$setInversedMatrix
     
-    return(inversed_matrix) # return the solved matrix
+    return(inversed_matrix) # return the inversed matrix
 }
